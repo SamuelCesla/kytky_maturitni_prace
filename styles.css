@@ -1,0 +1,198 @@
+ body{
+    font-family: Sitka Text, sans-serif;
+    background:#DA70D6;
+    text-align:center;
+    padding:1.875rem;
+  }
+  h1{ color:#FFFFFF; margin-bottom:0.625rem; }
+  .card{
+    background:pink;
+    padding:1.25rem;
+    max-width:51.25rem;
+    margin:auto;
+    border-radius:0.625rem;
+    box-shadow:0 0 0.625rem rgba(0,0,0,0.1);
+  }
+  .row{
+    display:flex;
+    gap:0.625rem;
+    justify-content:center;
+    align-items:center;
+    margin-bottom:0.75rem;
+    flex-wrap:wrap;
+  }
+  select, .smallBtn{
+    padding:0.625rem;
+    border:none;
+    border-radius:0.5rem;
+    font-size:0.875rem;
+  }
+  select{ min-width:13.75rem; }
+  .smallBtn{
+    background:#8000FF;
+    color:white;
+    cursor:pointer;
+  }
+  .smallBtn:hover{ background:#DA70D6; }
+
+  .tabs{
+    display:flex;
+    gap:0.625rem;
+    justify-content:center;
+    margin:0.625rem 0 1rem;
+    flex-wrap:wrap;
+  }
+  .tabBtn{
+    padding:0.625rem 0.875rem;
+    border:none;
+    border-radius:999px;
+    cursor:pointer;
+    background:rgba(255,255,255,0.55);
+    font-size:0.875rem;
+  }
+  .tabBtn.active{
+    background:#8000FF;
+    color:white;
+  }
+
+  /* ===== Quiz buttons ===== */
+  button.optionBtn{
+    display:block;
+    margin:0.625rem auto;
+    padding:0.625rem;
+    width:100%;
+    border:none;
+    border-radius:0.5rem;
+    background:#8000FF;
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+  }
+  button.optionBtn:hover{ background:#DA70D6; }
+  button.optionBtn:disabled{ opacity:0.78; cursor:not-allowed; }
+
+  /* ===== Image options ===== */
+  .imgGrid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(8.75rem, 1fr));
+    gap:0.75rem;
+    margin-top:0.625rem;
+  }
+  .imgBtn{
+    border:none;
+    border-radius:0.75rem;
+    background:#8000FF;
+    cursor:pointer;
+    padding:0.625rem;
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    gap:0.5rem;
+    align-items:center;
+  }
+  .imgBtn:hover{ background:#DA70D6; }
+  .imgBtn:disabled{ opacity:0.78; cursor:not-allowed; }
+  .imgBtn img{
+    width:100%;
+    aspect-ratio: 4 / 3;
+    object-fit:cover;
+    border-radius:0.625rem;
+    background:rgba(255,255,255,0.25);
+  }
+  .imgCaption{
+    font-size:0.8125rem;
+    color:white;
+    opacity:0.9;
+  }
+
+  #result{ margin-top:0.9375rem; font-weight:bold; }
+
+  .stats{ margin-top:0.625rem; }
+  .pill{
+    display:inline-block;
+    padding:0.375rem 0.625rem;
+    border-radius:999px;
+    background:rgba(255,255,255,0.5);
+    font-size:0.8125rem;
+  }
+  .hint{
+    margin:0.375rem 0 0;
+    font-size:0.8125rem;
+    opacity:0.85;
+  }
+
+  /* ===== Study mode ===== */
+  .studyWrap{
+    display:grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap:0.875rem;
+    margin-top:0.75rem;
+  }
+  @media (max-width: 820px){
+    .studyWrap{ grid-template-columns: 1fr; }
+  }
+  .studyCard{
+    background:rgba(255,255,255,0.6);
+    border-radius:0.875rem;
+    padding:0.875rem;
+    text-align:left;
+  }
+  .studyTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:0.625rem;
+    flex-wrap:wrap;
+  }
+  .studyTitle{
+    font-weight:bold;
+    font-size:1rem;
+  }
+  .studyImg{
+    width:100%;
+    aspect-ratio: 16 / 10;
+    object-fit:cover;
+    border-radius:0.75rem;
+    margin:0.75rem 0;
+    background:rgba(255,255,255,0.25);
+  }
+  .studyGrid{
+    display:grid;
+    grid-template-columns: 7.5rem 1fr;
+    gap:0.5rem 0.75rem;
+    font-size:0.875rem;
+  }
+  .studyLabel{ opacity:0.75; }
+  .studyValue{ font-weight:600; }
+
+  .studySide{
+    background:rgba(255,255,255,0.45);
+    border-radius:0.875rem;
+    padding:0.875rem;
+    text-align:left;
+  }
+  .studySide h3{
+    margin:0 0 0.625rem;
+    font-size:0.9375rem;
+  }
+  .studyList{
+    max-height:20rem;
+    overflow:auto;
+    display:flex;
+    flex-direction:column;
+    gap:0.5rem;
+  }
+  .studyItem{
+    display:flex;
+    justify-content:space-between;
+    gap:0.625rem;
+    align-items:center;
+    padding:0.625rem;
+    border-radius:0.625rem;
+    background:rgba(255,255,255,0.55);
+    cursor:pointer;
+  }
+  .studyItem.active{ outline:0.125rem solid #8000FF; }
+  .studyItem small{ opacity:0.75; display:block; }
+
+  .hiddenAnswer .studyValue{ filter: blur(0.4375rem); user-select:none; }

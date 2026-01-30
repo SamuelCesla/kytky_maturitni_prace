@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rostliny – učení + přiřazování</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
+
+<body>
+
+    <h1>Rostliny – učení + kvíz</h1>
+
+    <div class="card">
+        <div class="row">
+            <select id="category">
+                <option value="__ALL__">Vše dohromady</option>
+                <option value="Letničky">Letničky</option>
+                <option value="Trvalky">Trvalky</option>
+                <option value="Ovocné stromy">Ovocné stromy</option>
+                <option value="Jehličnaté stromy">Jehličnaté stromy</option>
+                <option value="Listnaté stromy">Listnaté stromy</option>
+            </select>
+
+            <select id="quizType">
+                <option value="classic">Z angličtiny do češtiny</option>
+                <option value="ultimate" selected="">Náhodně (EN/CZ/rod/druh)</option>
+                <option value="images">Anglicky → obrázek</option>
+            </select>
+
+            <select id="modeClassic" style="display: none;">
+                <option value="cz">Odpověď: český název</option>
+                <option value="genus">Odpověď: rod (Genus)</option>
+                <option value="species">Odpověď: druh (latinsky)</option>
+            </select>
+
+            <button class="smallBtn" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tabBtn active" id="tabStudy">Učení (slovíčka)</button>
+            <button class="tabBtn" id="tabQuiz">Kvíz (přiřazování)</button>
+        </div>
+
+        <div class="row">
+            <span class="pill">Počet v sadě: <span id="setCount">41</span></span>
+            <span class="pill">Sada: <span id="setName">VŠE DOHROMADY</span></span>
+            <span class="pill">Otázka: <span id="qType">EN</span></span>
+            <span class="pill">Hledám: <span id="aType">CZ</span></span>
+        </div>
+
+        <!-- ===== STUDY VIEW ===== -->
+        <div id="studyView">
+            <div class="row">
+                <button class="smallBtn" id="prevCardBtn">◀ Předchozí</button>
+                <button class="smallBtn" id="flipBtn">👁️ Skrýt/ukázat odpovědi</button>
+                <button class="smallBtn" id="nextCardBtn">Další ▶</button>
+            </div>
+
+            <div class="studyWrap">
+                <div class="studyCard" id="studyCard">
+                    <div class="studyTop">
+                        <div class="studyTitle" id="studyTitle">Petunia → Petúnie</div>
+                        <div class="pill">Kartička: <span id="studyIndex">1</span>/<span id="studyTotal">41</span></div>
+                    </div>
+
+                    <img class="studyImg" id="studyImg" alt="Obrázek rostliny"
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Petunia%20%C3%97atkinsiana.jpg">
+
+                    <div class="studyGrid" id="studyGrid">
+                        <div class="studyLabel">EN</div>
+                        <div class="studyValue">Petunia</div>
+                        <div class="studyLabel">CZ</div>
+                        <div class="studyValue">Petúnie</div>
+                        <div class="studyLabel">Rod</div>
+                        <div class="studyValue">Petunia</div>
+                        <div class="studyLabel">Druh</div>
+                        <div class="studyValue">Petunia × atkinsiana</div>
+                    </div>
+
+                    <div class="hint" style="margin-top:10px;">
+                        Tip: klikni na položku v seznamu pro rychlý výběr.
+                    </div>
+                </div>
+
+                <div class="studySide">
+                    <h3>Seznam ve vybrané sadě</h3>
+                    <div class="studyList" id="studyList">
+                        <div class="studyItem active" data-idx="0">
+                            <div><strong>Petunia</strong><small>Petúnie</small></div>
+                            <div><small>Petunia</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="1">
+                            <div><strong>Zinnia</strong><small>Cínie</small></div>
+                            <div><small>Zinnia</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="2">
+                            <div><strong>Marigold</strong><small>Aksamitník</small></div>
+                            <div><small>Tagetes</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="3">
+                            <div><strong>Cosmos</strong><small>Krásenka</small></div>
+                            <div><small>Cosmos</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="4">
+                            <div><strong>Sunflower</strong><small>Slunečnice</small></div>
+                            <div><small>Helianthus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="5">
+                            <div><strong>Impatiens</strong><small>Netýkavka</small></div>
+                            <div><small>Impatiens</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="6">
+                            <div><strong>Nasturtium</strong><small>Lichořeřišnice</small></div>
+                            <div><small>Tropaeolum</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="7">
+                            <div><strong>Snapdragon</strong><small>Hledík</small></div>
+                            <div><small>Antirrhinum</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="8">
+                            <div><strong>Peony</strong><small>Pivoňka</small></div>
+                            <div><small>Paeonia</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="9">
+                            <div><strong>Lavender</strong><small>Levandule</small></div>
+                            <div><small>Lavandula</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="10">
+                            <div><strong>Iris</strong><small>Kosatec</small></div>
+                            <div><small>Iris</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="11">
+                            <div><strong>Dahlia</strong><small>Jiřina</small></div>
+                            <div><small>Dahlia</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="12">
+                            <div><strong>Chrysanthemum</strong><small>Chryzantéma</small></div>
+                            <div><small>Chrysanthemum</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="13">
+                            <div><strong>Yarrow</strong><small>Řebříček</small></div>
+                            <div><small>Achillea</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="14">
+                            <div><strong>Foxglove</strong><small>Náprstník</small></div>
+                            <div><small>Digitalis</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="15">
+                            <div><strong>Hydrangea</strong><small>Hortenzie</small></div>
+                            <div><small>Hydrangea</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="16">
+                            <div><strong>Apple tree</strong><small>Jabloň</small></div>
+                            <div><small>Malus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="17">
+                            <div><strong>Pear tree</strong><small>Hrušeň</small></div>
+                            <div><small>Pyrus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="18">
+                            <div><strong>Plum tree</strong><small>Slivoň</small></div>
+                            <div><small>Prunus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="19">
+                            <div><strong>Cherry tree</strong><small>Třešeň</small></div>
+                            <div><small>Prunus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="20">
+                            <div><strong>Sour cherry tree</strong><small>Višeň</small></div>
+                            <div><small>Prunus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="21">
+                            <div><strong>Apricot tree</strong><small>Meruňka</small></div>
+                            <div><small>Prunus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="22">
+                            <div><strong>Peach tree</strong><small>Broskvoň</small></div>
+                            <div><small>Prunus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="23">
+                            <div><strong>Walnut tree</strong><small>Ořešák vlašský</small></div>
+                            <div><small>Juglans</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="24">
+                            <div><strong>Norway spruce</strong><small>Smrk ztepilý</small></div>
+                            <div><small>Picea</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="25">
+                            <div><strong>Scots pine</strong><small>Borovice lesní</small></div>
+                            <div><small>Pinus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="26">
+                            <div><strong>Silver fir</strong><small>Jedle bělokorá</small></div>
+                            <div><small>Abies</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="27">
+                            <div><strong>European larch</strong><small>Modřín opadavý</small></div>
+                            <div><small>Larix</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="28">
+                            <div><strong>Yew</strong><small>Tis</small></div>
+                            <div><small>Taxus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="29">
+                            <div><strong>Juniper</strong><small>Jalovec</small></div>
+                            <div><small>Juniperus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="30">
+                            <div><strong>Thuja</strong><small>Túje (zerav)</small></div>
+                            <div><small>Thuja</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="31">
+                            <div><strong>Oak</strong><small>Dub</small></div>
+                            <div><small>Quercus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="32">
+                            <div><strong>Beech</strong><small>Buk</small></div>
+                            <div><small>Fagus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="33">
+                            <div><strong>Birch</strong><small>Bříza</small></div>
+                            <div><small>Betula</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="34">
+                            <div><strong>Maple</strong><small>Javor</small></div>
+                            <div><small>Acer</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="35">
+                            <div><strong>Linden</strong><small>Lípa</small></div>
+                            <div><small>Tilia</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="36">
+                            <div><strong>Ash</strong><small>Jasan</small></div>
+                            <div><small>Fraxinus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="37">
+                            <div><strong>Elm</strong><small>Jilm</small></div>
+                            <div><small>Ulmus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="38">
+                            <div><strong>Hornbeam</strong><small>Habr</small></div>
+                            <div><small>Carpinus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="39">
+                            <div><strong>Poplar</strong><small>Topol</small></div>
+                            <div><small>Populus</small></div>
+                        </div>
+                        <div class="studyItem" data-idx="40">
+                            <div><strong>Willow</strong><small>Vrba</small></div>
+                            <div><small>Salix</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== QUIZ VIEW ===== -->
+        <div id="quizView" style="display:none;">
+            <h2 id="questionText">Sour cherry tree</h2>
+            <div class="hint" id="hintText">Vyber správný CZ pro zadaný EN.</div>
+
+            <div id="options"><button class="optionBtn">Smrk ztepilý</button><button
+                    class="optionBtn">Hledík</button><button class="optionBtn">Jilm</button><button
+                    class="optionBtn">Višeň</button></div>
+            <p id="result"></p>
+
+            <div class="stats">
+                Správně: <span id="score">0</span> |
+                Špatně: <span id="wrong">0</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html >
