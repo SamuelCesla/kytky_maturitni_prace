@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="scripts.js" defer></script>
+    <link rel="stylesheet" href="styles.css">>
+</head>
+<body>
+        <header class="site-header">
+        <div class="container">
+            <h1 class="logo">Kytky maturitní práce</h1>
+            <nav>
+                <a href="index.html"> Učení</a>
+                <a href="quiz.html"></a>Kvíz</a>
+            </nav>
+        </div>
+    </header>
+    
+    
+    
+    <div class="card">
+        <div class="row">
+            <select id="category">
+                <option value="__ALL__">Vše dohromady</option>
+                <option value="Letničky">Letničky</option>
+                <option value="Trvalky">Trvalky</option>
+                <option value="Ovocné stromy">Ovocné stromy</option>
+                <option value="Jehličnaté stromy">Jehličnaté stromy</option>
+                <option value="Listnaté stromy">Listnaté stromy</option>
+            </select>
+
+            <select id="quizType">
+                <option value="classic">Z angličtiny do češtiny</option>
+                <option value="ultimate" selected="">Náhodně (EN/CZ/rod/druh)</option>
+                <option value="images">Anglicky → obrázek</option>
+            </select>
+
+            <select id="modeClassic" style="display: none;">
+                <option value="cz">Odpověď: český název</option>
+                <option value="genus">Odpověď: rod (Genus)</option>
+                <option value="species">Odpověď: druh (latinsky)</option>
+            </select>
+
+            <button class="smallBtn" id="resetBtn">Reset</button>
+        </div>
+
+        <div class="row">
+            <span class="pill">Počet v sadě: <span id="setCount">41</span></span>
+            <span class="pill">Sada: <span id="setName">VŠE DOHROMADY</span></span>
+            <span class="pill">Otázka: <span id="qType">EN</span></span>
+            <span class="pill">Hledám: <span id="aType">CZ</span></span>
+        </div>
+
+        <!-- ===== QUIZ VIEW ===== -->
+        <div id="quizView">
+            <h2 id="questionText">Sour cherry tree</h2>
+            <div class="hint" id="hintText">Vyber správný CZ pro zadaný EN.</div>
+
+            <div id="options"><button class="optionBtn">Smrk ztepilý</button><button
+                    class="optionBtn">Hledík</button><button class="optionBtn">Jilm</button><button
+                    class="optionBtn">Višeň</button></div>
+            <p id="result"></p>
+
+            <div class="stats">
+                Správně: <span id="score">0</span> |
+                Špatně: <span id="wrong">0</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

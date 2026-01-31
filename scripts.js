@@ -174,10 +174,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function setActiveTab(tab) {
         // Komentář: Přepínání mezi učením a kvízem.
         const isStudy = tab === "study";
-        tabStudyEl.classList.toggle("active", isStudy);
-        tabQuizEl.classList.toggle("active", !isStudy);
-        studyViewEl.style.display = isStudy ? "" : "none";
-        quizViewEl.style.display = isStudy ? "none" : "";
+        if (typeof tabStudyEl !== 'undefined' && tabStudyEl) tabStudyEl.classList.toggle("active", isStudy);
+        if (typeof tabQuizEl !== 'undefined' && tabQuizEl) tabQuizEl.classList.toggle("active", !isStudy);
+        if (typeof studyViewEl !== 'undefined' && studyViewEl) studyViewEl.style.display = isStudy ? "" : "none";
+        if (typeof quizViewEl !== 'undefined' && quizViewEl) quizViewEl.style.display = isStudy ? "none" : "";
     }
 
     // ====== STUDY MODE ======
@@ -481,6 +481,15 @@ document.addEventListener("DOMContentLoaded", () => {
     initCategories();
     setModeClassicVisibility();
     renderSetInfo(getActiveWords());
-    setActiveTab("study");
-    resetAll();
+    const hasQuiz = document.getElementById("quizView");
+    const hasStudy = document.getElementById("studyView");
+    if (hasQuiz && !hasStudy) {
+        // Jsme v quiz.html
+        if (typeof setActiveTab === 'function') setActiveTab("quiz");
+        if (typeof resetQuiz === 'function') resetQuiz();
+    } else if (hasStudy) {
+        // Jsme v index.html
+        if (typeof setActiveTab === 'function') setActiveTab("study");
+        if (typeof resetAll === 'function') resetAll();
+    }
 });
