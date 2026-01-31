@@ -98,6 +98,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const hintTextEl = document.getElementById("hintText");
 
     // ====== Stav ======
+
+    // MODAL pro obrázek (index.html)
+    const imgModal = document.getElementById("imgModal");
+    const modalImg = document.getElementById("modalImg");
+    if (studyImgEl && imgModal && modalImg) {
+        studyImgEl.style.cursor = "zoom-in";
+        studyImgEl.onclick = function() {
+            modalImg.src = studyImgEl.src;
+            imgModal.style.display = "flex";
+        };
+        imgModal.onclick = function() {
+            imgModal.style.display = "none";
+        };
+    }
     let correct = 0;
     let wrong = 0;
     let locked = false;
@@ -191,6 +205,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const left = document.createElement("div");
             left.innerHTML = `<strong>${item.en}</strong><small>${item.cz}</small>`;
+            left.style.cursor = "pointer";
+            left.onclick = (e) => {
+                e.stopPropagation();
+                studyIndex = idx;
+                renderStudyCard();
+            };
 
             const right = document.createElement("div");
             right.innerHTML = `<small>${item.genus}</small>`;
@@ -198,6 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
             el.appendChild(left);
             el.appendChild(right);
 
+            // Pro jistotu zachováme i kliknutí na celý řádek
             el.onclick = () => {
                 studyIndex = idx;
                 renderStudyCard();
@@ -464,18 +485,30 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ====== Events ======
-    tabStudyEl.onclick = () => { setActiveTab("study"); resetStudy(); };
-    tabQuizEl.onclick = () => { setActiveTab("quiz"); resetQuiz(); };
+   
 
-    prevCardBtn.onclick = () => { studyIndex--; renderStudyCard(); };
-    nextCardBtn.onclick = () => { studyIndex++; renderStudyCard(); };
-    flipBtn.onclick = () => { hideAnswers = !hideAnswers; renderStudyCard(); };
 
-    resetBtnEl.onclick = resetAll;
+    if (prevCardBtn) prevCardBtn.onclick = () => { studyIndex--; renderStudyCard(); };
+    if (nextCardBtn) nextCardBtn.onclick = () => { studyIndex++; renderStudyCard(); };
+    if (flipBtn) flipBtn.onclick = () => { hideAnswers = !hideAnswers; renderStudyCard(); };
 
-    categoryEl.onchange = () => { renderSetInfo(getActiveWords()); resetAll(); };
-    quizTypeEl.onchange = () => { setModeClassicVisibility(); resetQuiz(); };
-    modeClassicEl.onchange = () => { if (quizTypeEl.value === "classic") resetQuiz(); };
+    // Oprava: v index.html resetBtn resetuje pouze studijní režim
+    if (resetBtnEl) {
+        resetBtnEl.onclick = () => {
+            if (studyViewEl && (!quizViewEl || quizViewEl.style.display === "none")) {
+                resetStudy();
+            } else {
+                resetAll();
+            }
+        };
+    }
+
+    if (tabStudyEl) tabStudyEl.onclick = () => { setActiveTab("study"); resetStudy(); };
+    if (tabQuizEl) tabQuizEl.onclick = () => { setActiveTab("quiz"); resetQuiz(); };
+
+    if (categoryEl) categoryEl.onchange = () => { renderSetInfo(getActiveWords()); resetAll(); };
+    if (quizTypeEl) quizTypeEl.onchange = () => { setModeClassicVisibility(); resetQuiz(); };
+    if (modeClassicEl) modeClassicEl.onchange = () => { if (quizTypeEl.value === "classic") resetQuiz(); };
 
     // ====== Start ======
     initCategories();
