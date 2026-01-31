@@ -492,15 +492,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (nextCardBtn) nextCardBtn.onclick = () => { studyIndex++; renderStudyCard(); };
     if (flipBtn) flipBtn.onclick = () => { hideAnswers = !hideAnswers; renderStudyCard(); };
 
-    // Oprava: v index.html resetBtn resetuje pouze studijní režim
+    // Reset tlačítko: v index.html resetuje pouze studijní režim, v quiz.html vše
     if (resetBtnEl) {
-        resetBtnEl.onclick = () => {
-            if (studyViewEl && (!quizViewEl || quizViewEl.style.display === "none")) {
-                resetStudy();
-            } else {
-                resetAll();
-            }
-        };
+        if (studyViewEl && !quizViewEl) {
+            resetBtnEl.onclick = resetStudy;
+        } else {
+            resetBtnEl.onclick = resetAll;
+        }
     }
 
     if (tabStudyEl) tabStudyEl.onclick = () => { setActiveTab("study"); resetStudy(); };
@@ -516,10 +514,11 @@ document.addEventListener("DOMContentLoaded", () => {
     renderSetInfo(getActiveWords());
     const hasQuiz = document.getElementById("quizView");
     const hasStudy = document.getElementById("studyView");
-    if (hasQuiz && !hasStudy) {
+    if (hasQuiz) {
         // Jsme v quiz.html
         if (typeof setActiveTab === 'function') setActiveTab("quiz");
         if (typeof resetQuiz === 'function') resetQuiz();
+        if (resetBtnEl) resetBtnEl.onclick = resetQuiz;
     } else if (hasStudy) {
         // Jsme v index.html
         if (typeof setActiveTab === 'function') setActiveTab("study");
